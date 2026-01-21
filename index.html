@@ -11,22 +11,39 @@
         .nav-card { background: white; padding: 1rem; border-radius: 0.5rem; border: 1px solid #e5e7eb; text-align: center; font-size: 0.875rem; color: #374151; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; min-height: 3.5rem; }
         .nav-card:hover { transform: translateY(-3px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); color: #2563eb; border-color: #bfdbfe; }
         .section-title { font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem; padding-left: 0.75rem; color: #1f2937; display: flex; align-items: center; }
+        .search-input:focus { outline: none; border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); }
+        .search-engine-tab.active { color: #2563eb; border-bottom: 2px solid #2563eb; font-weight: 600; }
     </style>
 </head>
 <body class="p-4 md:p-10">
 
     <div class="max-w-7xl mx-auto">
-        <header class="mb-10 text-center">
+        <header class="mb-12 text-center">
             <h1 class="text-3xl font-bold text-gray-800 tracking-tight">江苏中衡专业办公导航</h1>
-            <p class="text-gray-500 mt-2 text-sm">核心数据查询 · 政策法规 · 专业工具一键直达</p>
+            <p class="text-gray-500 mt-2 text-sm mb-8">核心数据查询 · 政策法规 · 专业工具一键直达</p>
+
+            <div class="max-w-2xl mx-auto bg-white p-4 rounded-xl shadow-md border border-gray-100">
+                <div class="flex space-x-6 mb-3 text-sm text-gray-500 border-b border-gray-50 pb-2 ml-2">
+                    <button onclick="setEngine('baidu')" id="tab-baidu" class="search-engine-tab active">百度</button>
+                    <button onclick="setEngine('google')" id="tab-google" class="search-engine-tab">谷歌</button>
+                    <button onclick="setEngine('bing')" id="tab-bing" class="search-engine-tab">必应</button>
+                </div>
+                <div class="flex items-center">
+                    <input type="text" id="search-input" placeholder="输入关键词搜索..." 
+                        class="w-full px-4 py-2 text-gray-700 bg-gray-50 border border-gray-200 rounded-lg search-input transition-all"
+                        onkeydown="if(event.keyCode==13) doSearch()">
+                    <button onclick="doSearch()" class="ml-3 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium">
+                        搜索
+                    </button>
+                </div>
+            </div>
         </header>
 
         <div class="space-y-10">
-
             <section>
                 <h2 class="section-title border-l-4 border-blue-600">核心数据与询价</h2>
                 <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
-                    <a href="http://www.ceca.org.cn/" target="_blank" class="nav-card">中国建设工程造价信息网</a>
+                    <a href="http://www.ccea.pro/" target="_blank" class="nav-card">中国建设工程造价信息网</a>
                     <a href="https://www.gcmall.com/" target="_blank" class="nav-card">广材网 / 助手中建</a>
                     <a href="https://www.mysteel.com/" target="_blank" class="nav-card">我的钢铁网</a>
                     <a href="https://www.huixun.com/" target="_blank" class="nav-card">慧讯网 (材料库)</a>
@@ -42,10 +59,8 @@
                     <a href="https://www.samr.gov.cn/" target="_blank" class="nav-card">国家市场监管总局</a>
                     <a href="https://www.std.gov.cn/" target="_blank" class="nav-card">国家标准公共服务</a>
                     <a href="https://www.fatianshi.cn/" target="_blank" class="nav-card">法天使 (合同库)</a>
-                    <a href="https://www.gsxt.gov.cn/" target="_blank" class="nav-card">国家企业信用公示</a>
+                    <a href="https://www.gsxt.gov.cn/" target="_blank" class="nav-card">国家企业信用公示系统</a>
                     <a href="https://www.tianyancha.com/" target="_blank" class="nav-card">天眼查</a>
-                    <a href="https://www.qcc.com/" target="_blank" class="nav-card">企查查</a>
-                    <a href="https://wenshu.court.gov.cn/" target="_blank" class="nav-card">中国裁判文书网</a>
                 </div>
             </section>
 
@@ -54,36 +69,10 @@
                 <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
                     <a href="http://www.ccgp.gov.cn/" target="_blank" class="nav-card font-semibold text-orange-700">中国政府采购网</a>
                     <a href="http://www.ggzy.gov.cn/" target="_blank" class="nav-card">全国公共资源交易平台</a>
-                    <a href="http://www.cebpubservice.com/" target="_blank" class="nav-card">中招投标服务平台</a>
+                    <a href="http://www.cebpubservice.com/" target="_blank" class="nav-card text-sm">中招投标服务平台</a>
                     <a href="https://www.plap.cn/" target="_blank" class="nav-card">军队采购网</a>
                     <a href="https://www.zcygov.cn/" target="_blank" class="nav-card">政采云平台</a>
-                    <a href="https://www.zbytb.com/" target="_blank" class="nav-card">采购与招标网</a>
                     <a href="https://www.bidradar.com/" target="_blank" class="nav-card text-blue-600">招标雷达</a>
-                    <a href="http://jzsc.mohurd.gov.cn/" target="_blank" class="nav-card text-orange-600">全国建筑市场监管</a>
-                </div>
-            </section>
-
-            <section>
-                <h2 class="section-title border-l-4 border-indigo-600">专业算量与项目管理</h2>
-                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
-                    <a href="https://www.glodon.com/" target="_blank" class="nav-card">广联达服务网</a>
-                    <a href="https://www.lubansoft.com/" target="_blank" class="nav-card">鲁班软件</a>
-                    <a href="https://www.pinming.cn/" target="_blank" class="nav-card">品茗科技</a>
-                    <a href="https://www.jianwen.com.cn/" target="_blank" class="nav-card">建文项目管理</a>
-                    <a href="https://www.microsoft.com/zh-cn/microsoft-365/project/" target="_blank" class="nav-card">MS Project</a>
-                    <a href="https://www.oracle.com/cn/industries/construction-engineering/primavera-p6/" target="_blank" class="nav-card">Primavera P6</a>
-                </div>
-            </section>
-
-            <section>
-                <h2 class="section-title border-l-4 border-purple-600">效率协作与云盘</h2>
-                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
-                    <a href="https://docs.qq.com/" target="_blank" class="nav-card">腾讯文档</a>
-                    <a href="https://www.yuque.com/" target="_blank" class="nav-card">语雀 (知识库)</a>
-                    <a href="https://cowtransfer.com/" target="_blank" class="nav-card">奶牛快传 (大文件)</a>
-                    <a href="https://www.jianguoyun.com/" target="_blank" class="nav-card">坚果云同步</a>
-                    <a href="https://work.weixin.qq.com/" target="_blank" class="nav-card">企业微信</a>
-                    <a href="https://www.dingtalk.com/" target="_blank" class="nav-card">钉钉官网</a>
                 </div>
             </section>
 
@@ -98,13 +87,35 @@
                     <a href="https://www.chsi.com.cn/" target="_blank" class="nav-card">学信网</a>
                 </div>
             </section>
-
         </div>
 
         <footer class="mt-16 pb-10 text-center text-gray-400 text-xs">
-            © 2026 江苏中衡导航平台 | 实时同步专业办公资源 
+            © 2026 江苏中衡导航平台 | 实时同步专业办公资源
         </footer>
     </div>
 
+    <script>
+        let currentEngine = 'baidu';
+        const engines = {
+            baidu: 'https://www.baidu.com/s?wd=',
+            google: 'https://www.google.com/search?q=',
+            bing: 'https://cn.bing.com/search?q='
+        };
+
+        function setEngine(engine) {
+            currentEngine = engine;
+            // 更新 UI 样式
+            document.querySelectorAll('.search-engine-tab').forEach(tab => tab.classList.remove('active'));
+            document.getElementById('tab-' + engine).classList.add('active');
+            document.getElementById('search-input').placeholder = '在 ' + (engine === 'baidu' ? '百度' : engine === 'google' ? '谷歌' : '必应') + ' 中搜索...';
+        }
+
+        function doSearch() {
+            const query = document.getElementById('search-input').value;
+            if (query) {
+                window.open(engines[currentEngine] + encodeURIComponent(query), '_blank');
+            }
+        }
+    </script>
 </body>
 </html>
